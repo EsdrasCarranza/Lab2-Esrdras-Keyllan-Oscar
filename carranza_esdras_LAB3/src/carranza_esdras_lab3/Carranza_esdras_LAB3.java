@@ -81,7 +81,7 @@ public class Carranza_esdras_LAB3 {
                 System.out.println("Ingrese un numero: ");
                 int numero = info.nextInt();
                 if (numero < 0) {
-                    System.out.println("Por favor, ingrese un número entero no negativo.");
+                    System.out.println("Por favor, ingrese un numero entero no negativo.");
                     return;
                 }
 
@@ -95,7 +95,7 @@ public class Carranza_esdras_LAB3 {
                 temp = numero;
                 boolean primerDigito = true;
 
-                System.out.print("La suma de los dígitos de " + numero + " es: ");
+                System.out.print("La suma de los digitos de " + numero + " es: ");
 
                 while (divisor > 0) {
                     int digito = temp / divisor;
@@ -117,7 +117,7 @@ public class Carranza_esdras_LAB3 {
                 System.out.println("Que numero de filas desea en la piramide");
                 int numero = info.nextInt();
                 for (int i = 1; i <= numero; i++) {
-                    for (int o = 1; o < i; o++) {
+                    for (int j = 1; j < i; j++) {
                         System.out.print("  ");
                     }
                     for (int k = numero; k >= i; k--) {
@@ -135,4 +135,4 @@ public class Carranza_esdras_LAB3 {
 }
     
 
-//while(opcion_juego != "tijera" || opcion_juego !="papel" )
+
