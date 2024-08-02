@@ -114,7 +114,7 @@ public class Carranza_esdras_LAB3 {
                 System.out.println(" = " + suma);
 
             } else if (opcion == 3) {
-                System.out.println("Que numero de filas desea en la piramide");
+                System.out.println("Ingrese el numero de filas: ");
                 int numero = info.nextInt();
                 for (int i = 1; i <= numero; i++) {
                     for (int j = 1; j < i; j++) {
