@@ -102,6 +102,10 @@ public class Esdras_Carranza_Prueba1 {
                         lista_divisores += o + " y ";
                     }
                 }
+                // en esta linea hago uso de substring para que no se imprima la Y al final de la lista, ademas que aseguro que muestre la lista
+                    String nueva_lista = lista_divisores.length() > 0 
+                             ? lista_divisores.substring(0, lista_divisores.length() - 3) 
+                             : lista_divisores;
                 // aqui se valida que si el numero tiene mas de 2 divisores no es primo,pero si tiene solo 2 si lo es
                 if (divisores == 2) {
                     System.out.println("el numero " + numero_aleatorio + " es primo porque solo tiene dos divisores.");
@@ -110,7 +114,7 @@ public class Esdras_Carranza_Prueba1 {
                 }
                 // se imprimen los  resultados
                 System.out.println("numero de divisores: " + divisores);
-                System.out.println("divisores de " + numero + " son: " + lista_divisores);
+                System.out.println("divisores de " + numero + " son: " + nueva_lista);
             } else if (opcion == 4) {
                 cant_votaciones++;
                 //Inicio de programa y solicituda de cuantos votantes seran
