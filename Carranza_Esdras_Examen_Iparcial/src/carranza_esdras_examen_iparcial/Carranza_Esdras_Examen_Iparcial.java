@@ -106,6 +106,76 @@ public class Carranza_Esdras_Examen_Iparcial {
                 } else {
                     System.out.println("No se ingresaron numeros.");
                 }
+            }else if (opcion == 3) {
+                try{
+                System.out.println("Servicio de venta de canales");
+                System.out.println("Ingrese su nombre: ");
+                nombre = info.next();
+                }catch(InputMismatchException e ){
+                    System.out.println("Ingresar nombre");
+                    info.nextLine();
+                }
+                while (cont_compra.equalsIgnoreCase("SI")) {
+                    try{
+                    System.out.println("Ingrese el tipo de canal que puede ser HD o NORMAL: ");
+                    tipo_canal = info.next().toUpperCase();
+                    }catch(InputMismatchException e){
+                        System.out.println("Ingresar el tipo de canal");
+                        info.nextLine();
+                    }
+                    if (tipo_canal.equals("HD") || tipo_canal.equals("NORMAL")) {
+                        System.out.println("Usted selecciono: " + tipo_canal);
+                    } else {
+                        System.out.println("Ingrese un tipo de canal valido.");
+                    }
+
+                    if (tipo_canal.equals("HD")) {
+                        monto += 30;
+                        cant_hd++;
+                    } else if (tipo_canal.equals("NORMAL")) {
+                        monto += 20;
+                        cant_normales++;
+                    }
+
+                    System.out.println("Desea comprar otra caja? (SI o NO): ");
+                    cont_compra = info.next().toUpperCase();
+                }
+
+                while (correct_caja == 0) {
+                    try{
+                    System.out.println("Ingrese el tipo de caja digital que necesite, estas pueden ser: "
+                            + "\n1.LIGHTBOX"
+                            + "\n2.HDBOX"
+                            + "\n3.DVRBOX"
+                            + "\nIngrese el tipo de caja: ");
+                    caja_digital = info.next();
+                    }catch(InputMismatchException e){
+                        System.out.println("Ingresar el tipo de caja digital");
+                    }
+                    if (caja_digital.equalsIgnoreCase("LIGHTBOX")) {
+                        precio_caja = 50;
+                        correct_caja = 1;
+                    } else if (caja_digital.equalsIgnoreCase("HDBOX")) {
+                        precio_caja = 100;
+                        correct_caja = 1;
+                    } else if (caja_digital.equalsIgnoreCase("DVRBOX")) {
+                        precio_caja = 150;
+                        correct_caja = 1;
+                    } else {
+                        System.out.println("Ingrese una caja de las 3.");
+                    }
+                }
+
+                subtotal = monto + precio_caja;
+                impuesto = subtotal * 0.15;
+                total = subtotal + impuesto;
+                System.out.println(" ");
+                System.out.println(nombre + " usted agrego " + cant_normales + " canales normales y " + cant_hd + " canales HD.");
+                System.out.println("El subtotal a pagar es " + subtotal + " Lps."
+                        + "\nEl impuesto es del 15%, por ende, se cobrara " + impuesto + " Lps."
+                        + "\nTotal a pagar es de: " + total + " Lps.");
+                System.out.println(" ");
+
             }
 
         }
