@@ -22,8 +22,9 @@ public class Carranza_Esdras_Examen_Iparcial {
         info.useDelimiter("\n");
 
         double monto = 0, subtotal = 0, impuesto = 0, total = 0;
-        int opcion = 0, cont_opcion = 0, filas = 0, numero = 0, suma = 0, contador = 0, mayor = 0, correct_caja = 0, precio_caja = 0, cant_normales = 0, cant_hd = 0;
-        String continuar = "si", nombre = " ", cont_compra = "si", tipo_canal = " ", caja_digital = " ";
+        int opcion = 0, cont_opcion = 0, filas = 0, numero = 0, suma = 0, contador = 0, mayor = 0, correct_caja = 0, precio_caja = 0, cant_normales = 0, cant_hd = 0,
+                contador_vocales = 0;
+        String continuar = "si", nombre = " ", cont_compra = "si", tipo_canal = " ", caja_digital = " ",palabra = " ";
 
         while (opcion != 5) {
             try {
@@ -106,20 +107,20 @@ public class Carranza_Esdras_Examen_Iparcial {
                 } else {
                     System.out.println("No se ingresaron numeros.");
                 }
-            }else if (opcion == 3) {
-                try{
-                System.out.println("Servicio de venta de canales");
-                System.out.println("Ingrese su nombre: ");
-                nombre = info.next();
-                }catch(InputMismatchException e ){
+            } else if (opcion == 3) {
+                try {
+                    System.out.println("Servicio de venta de canales");
+                    System.out.println("Ingrese su nombre: ");
+                    nombre = info.next();
+                } catch (InputMismatchException e) {
                     System.out.println("Ingresar nombre");
                     info.nextLine();
                 }
                 while (cont_compra.equalsIgnoreCase("SI")) {
-                    try{
-                    System.out.println("Ingrese el tipo de canal que puede ser HD o NORMAL: ");
-                    tipo_canal = info.next().toUpperCase();
-                    }catch(InputMismatchException e){
+                    try {
+                        System.out.println("Ingrese el tipo de canal que puede ser HD o NORMAL: ");
+                        tipo_canal = info.next().toUpperCase();
+                    } catch (InputMismatchException e) {
                         System.out.println("Ingresar el tipo de canal");
                         info.nextLine();
                     }
@@ -142,14 +143,14 @@ public class Carranza_Esdras_Examen_Iparcial {
                 }
 
                 while (correct_caja == 0) {
-                    try{
-                    System.out.println("Ingrese el tipo de caja digital que necesite, estas pueden ser: "
-                            + "\n1.LIGHTBOX"
-                            + "\n2.HDBOX"
-                            + "\n3.DVRBOX"
-                            + "\nIngrese el tipo de caja: ");
-                    caja_digital = info.next();
-                    }catch(InputMismatchException e){
+                    try {
+                        System.out.println("Ingrese el tipo de caja digital que necesite, estas pueden ser: "
+                                + "\n1.LIGHTBOX"
+                                + "\n2.HDBOX"
+                                + "\n3.DVRBOX"
+                                + "\nIngrese el tipo de caja: ");
+                        caja_digital = info.next();
+                    } catch (InputMismatchException e) {
                         System.out.println("Ingresar el tipo de caja digital");
                     }
                     if (caja_digital.equalsIgnoreCase("LIGHTBOX")) {
@@ -176,6 +177,35 @@ public class Carranza_Esdras_Examen_Iparcial {
                         + "\nTotal a pagar es de: " + total + " Lps.");
                 System.out.println(" ");
 
+            } else if (opcion == 4) {
+                try{
+                System.out.println("Ingrese una palabra:");
+                palabra = info.next();
+                
+                }catch(InputMismatchException e){
+                    System.out.println("Ingresar una palabra");
+                }
+                for (int i = 0; i < palabra.length(); i++) {
+                    char letra = palabra.charAt(i);
+
+                    switch (letra) {
+                        case 'a':
+                        case 'e':
+                        case 'i':
+                        case 'o':
+                        case 'u':
+                            contador_vocales++;
+                            break;
+                        default:
+
+                            break;
+                    }
+                }
+                System.out.println(" ");
+                System.out.println("La cadena contiene " + contador_vocales + " vocales minusculas.");
+
+            } else if (opcion == 5) {
+                System.out.println("Hasta luego!!! :D");
             }
 
         }
