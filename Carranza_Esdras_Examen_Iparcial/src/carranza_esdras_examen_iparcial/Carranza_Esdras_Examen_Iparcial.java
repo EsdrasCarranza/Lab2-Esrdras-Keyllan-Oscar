@@ -79,9 +79,36 @@ public class Carranza_Esdras_Examen_Iparcial {
                     System.out.println("= " + resultado);
                 }
 
-            } 
+            } else if (opcion == 2) {
+                while (continuar.equalsIgnoreCase("si")) {
+                    try {
+                        System.out.print("Ingrese un numero entero: ");
+                        int entero = info.nextInt();
+                        suma += entero;
+                        contador++;
+
+                        if (entero > mayor) {
+                            mayor = entero;
+                        }
+
+                        System.out.print("Desea ingresar otro numero? (SI/NO): ");
+                        continuar = info.next().toLowerCase();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Por favor ingrese un numero valido.");
+                        info.nextLine();
+                    }
+                }
+
+                if (contador > 0) {
+                    double promedio = (double) suma / contador;
+                    System.out.println("El numero mayor ingresado es: " + mayor);
+                    System.out.println("El promedio de los numeros ingresados es: " + promedio);
+                } else {
+                    System.out.println("No se ingresaron numeros.");
+                }
+            }
+
         }
 
     }
-
 }
