@@ -51,7 +51,7 @@ public class Esdras_Carranza_prueb3 {
         }
          System.out.println(" ");
          System.out.println("Lista de palabras B");
-         for (int k = 0; k < 10; k++) {
+         for (int k = 0; k < valor_arreglos; k++) {
             int indice_palabrasb = random.nextInt(palabras.length);
             arreglo_b[k] =palabras[indice_palabrasb];
             
