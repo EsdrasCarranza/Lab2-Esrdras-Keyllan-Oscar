@@ -198,6 +198,7 @@ public class Visual_Inicio extends javax.swing.JFrame {
         UsuarioInfo cuenta = UsuarioInfo.getCuenta(i);
         if (cuenta.getusuario().equals(usuari) && cuenta.getcontraseña().equals(contra)) {
             encontrado = true;
+            user_actual.setUsuarioActual(cuenta);
             break;
         }
     }

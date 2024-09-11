@@ -249,11 +249,12 @@ public class pantalla_registro extends javax.swing.JFrame {
         String nombre = NOMBRE.getText();
         String usuario = user.getText().trim();
         String contraseña = contra.getText().trim();
-        String fecha = FECHA.getText();
+        String fechas = FECHA.getText();
         String edad = EDAD.getText();
         int gener = Genero.getSelectedIndex();
         String genero = Genero.getItemAt(gener);
         UsuarioInfo.verificar_cuenta(usuario);
+        
 
         try {
             int Edad = Integer.parseInt(EDAD.getText());
@@ -262,15 +263,16 @@ public class pantalla_registro extends javax.swing.JFrame {
             return;
         }
 
-        if (nombre.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || fecha.isEmpty() || edad.isEmpty()) {
+        if (nombre.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || fechas.isEmpty() || edad.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor llene todos los campos solicitados");
         } else {
             if (UsuarioInfo.verificar_cuenta(usuario)) {
                 JOptionPane.showMessageDialog(null, "el usuario ya esta en uso");
             } else {
-                UsuarioInfo cuenta = new UsuarioInfo(usuario, nombre, edad, fecha, contraseña, genero);
+                UsuarioInfo cuenta = new UsuarioInfo(usuario, nombre, edad, fechas, contraseña, genero);
 
                 UsuarioInfo.agregarCuenta(cuenta);
+                user_actual.setUsuarioActual(cuenta);
 
                 NOMBRE.setText("");
                 user.setText("");
@@ -280,10 +282,17 @@ public class pantalla_registro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cuenta registrada exitosamente: " + "\n"
                         + "Nombre: " + nombre + "\n"
                         + "Usuario: " + usuario + "\n"
-                        + "Fecha: " + fecha + "\n"
+                        + "Fecha: " + fechas + "\n"
                         + "Edad: " + edad + "\n"
                         + "contra: " + contraseña
                         + "\n genero: " + genero);
+
+                menu_principal menu = new menu_principal();
+                menu.setVisible(true);
+                this.dispose();
+                
+                
+                
 
             }
         }
