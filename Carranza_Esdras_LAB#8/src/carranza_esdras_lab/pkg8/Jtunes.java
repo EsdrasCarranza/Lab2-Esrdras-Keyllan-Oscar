@@ -11,54 +11,56 @@ import javax.swing.JOptionPane;
  * @author 50488
  */
 public class Jtunes {
-    
-    private song[] canciones;
-    
-    
-    public Jtunes (){
-        this.canciones = new song [40];
+private song[] canciones;
+
+    public Jtunes() {
+        this.canciones = new song[40];
     }
-    
-    public song buscarrola(int codigo) {
-        for (song cancion : canciones) {
-            if (cancion != null && cancion.getCodigo() == codigo) {
-                return cancion; 
-            }
+
+    public song buscarRola(int codigo) {
+    for (song cancion : canciones) {
+        if (cancion != null && cancion.getCodigo() == codigo) {
+            return cancion;
         }
-        return null; 
     }
+    return null;
+}
+
     public boolean addSong(int codigo, String nombre, double precio) {
-        
-        if (buscarrola(codigo) != null) {
-            JOptionPane.showMessageDialog(null, "Error cancion ya existe");
+        if (buscarRola(codigo) != null) {
+            
             return false;
         }
-         for (int i = 0; i < canciones.length; i++) {
+        for (int i = 0; i < canciones.length; i++) {
             if (canciones[i] == null) {
-                canciones[i] = new song(codigo, nombre, precio); 
-                JOptionPane.showMessageDialog(null, "cancion agregada: " + nombre);
+                canciones[i] = new song(codigo, nombre, precio);
+                
                 return true;
             }
         }
-         
-         JOptionPane.showMessageDialog(null, "NO HAY ESPACIO");
-        return false; 
+        System.out.println("No hay espacio");
+        return false;
     }
-    
-    public void ratesong(int codigo ,int estrellas ){
-        song cancion = buscarrola(codigo);
-        if(cancion != null){
-            cancion.addstars(estrellas);
-            JOptionPane.showMessageDialog(null, "ESTRELLAS ACTUALIZADAS");
+
+    public void rateSong(int codigo, int estrellas) {
+        song cancion = buscarRola(codigo);
+        if (cancion != null) {
+            cancion.addStars(estrellas);
+           
             cancion.print();
-        }else{
-            JOptionPane.showMessageDialog(null,"Error. Cancion no existe");
+        } else {
+            System.out.println("Error: Canción no existe");
+        }
+    }
+
+    public void printSongs() {
+        System.out.println("Lista de canciones:");
+        for (song cancion : canciones) {
+            if (cancion != null) {
+                cancion.print();
+            }
         }
     }
     
-    public void printSong(){
-        
     }
-    
-        
-}
+

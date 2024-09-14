@@ -27,28 +27,97 @@ public class visual_Itunes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        añadir_cancion = new javax.swing.JButton();
+        buscar_cancion = new javax.swing.JButton();
+        rate_cancion = new javax.swing.JButton();
+        print_cancion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel1.setText("ITUNES");
+
+        añadir_cancion.setBackground(new java.awt.Color(204, 255, 255));
+        añadir_cancion.setText("AÑADIR CANCION");
+        añadir_cancion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                añadir_cancionMouseClicked(evt);
+            }
+        });
+
+        buscar_cancion.setBackground(new java.awt.Color(204, 255, 255));
+        buscar_cancion.setText("BUSCAR CANCION");
+        buscar_cancion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar_cancionMouseClicked(evt);
+            }
+        });
+        buscar_cancion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_cancionActionPerformed(evt);
+            }
+        });
+
+        rate_cancion.setBackground(new java.awt.Color(204, 255, 255));
+        rate_cancion.setText("RATE CANCION");
+        rate_cancion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rate_cancionMouseClicked(evt);
+            }
+        });
+
+        print_cancion.setBackground(new java.awt.Color(204, 255, 255));
+        print_cancion.setText("IMPRIRMIR CANCIONES");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 120, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buscar_cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(añadir_cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(print_cancion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rate_cancion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(106, 106, 106))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(212, 212, 212))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(añadir_cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(buscar_cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(rate_cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(print_cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -57,6 +126,31 @@ public class visual_Itunes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void añadir_cancionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_añadir_cancionMouseClicked
+        añadir_cancion xd = new añadir_cancion();
+        xd.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_añadir_cancionMouseClicked
+
+    private void buscar_cancionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar_cancionMouseClicked
+    buscar_cancion hola = new buscar_cancion();
+    hola.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_buscar_cancionMouseClicked
+
+    private void rate_cancionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rate_cancionMouseClicked
+    rate_cancion holis =new rate_cancion();
+    holis.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_rate_cancionMouseClicked
+
+    private void buscar_cancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_cancionActionPerformed
+      buscar_cancion xd = new buscar_cancion();
+      xd.setVisible(true);
+      this.dispose();
+    }//GEN-LAST:event_buscar_cancionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,6 +188,11 @@ public class visual_Itunes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton añadir_cancion;
+    private javax.swing.JButton buscar_cancion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton print_cancion;
+    private javax.swing.JButton rate_cancion;
     // End of variables declaration//GEN-END:variables
 }

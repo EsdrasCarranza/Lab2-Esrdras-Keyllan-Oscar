@@ -9,20 +9,18 @@ import javax.swing.JOptionPane;
  * @author 50488
  */
 public class song {
-    private int codigo;
+   private int codigo;
     private String nombre;
     private double precio;
-    private int numero_estrella;
-    private int cant_views;
-    
-    
-    public song(int codigo,String nombre,double precio){
+    private int sumaEstrellas;
+    private int cantidadReviews;
+
+    public song(int codigo, String nombre, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
-        this.numero_estrella = 0;
-        this.cant_views = 0;
-       
+        this.sumaEstrellas = 0;
+        this.cantidadReviews = 0;
     }
 
     public int getCodigo() {
@@ -37,33 +35,24 @@ public class song {
         return precio;
     }
 
-    public int getNumero_estrella() {
-        return numero_estrella;
+    public void addStars(int stars) {
+        if (stars >= 0 && stars <= 5) {
+            sumaEstrellas += stars;
+            cantidadReviews++;
+        } else {
+            System.out.println("Error: La cantidad de estrellas debe estar entre 0 y 5");
+        }
     }
 
-    public int getCant_views() {
-        return cant_views;
-    }
-    
-    
-    public void addstars(int estrellas){
-        if(estrellas >= 1 && estrellas <= 5){
-            cant_views++;
-            numero_estrella += estrellas;
-        }else{
-            JOptionPane.showMessageDialog(null, "ingrese unicamente estrellas en el rango de 0 a 5");
-        }
-    }
-    
-    public double rating(){
-        if(cant_views == 0){
+    public double songRating() {
+        if (cantidadReviews == 0) {
             return 0;
         }
-        return (double) numero_estrella /cant_views;
+        return (double) sumaEstrellas / cantidadReviews;
     }
-    
-    public void print(){
-        System.out.println(codigo + " – " + nombre + " – " + precio + " – " + rating());
+
+    public void print() {
+        System.out.printf("CÓDIGO: %d - NOMBRE: %s - PRECIO: %.2f - RATING: %.2f%n", codigo, nombre, precio, songRating());
     }
     
 }
