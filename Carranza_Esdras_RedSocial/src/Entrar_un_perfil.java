@@ -16,11 +16,19 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
      */
     public Entrar_un_perfil() {
         initComponents();
-        
 
     }
-  Gestion_Cuenta gestionCuentas = new Gestion_Cuenta();
+    Gestion_Cuenta gestionCuentas = new Gestion_Cuenta();
+   public void actualizarInterfaz() {
+    UsuarioInfo usuarioLogueado = user_actual.getUsuarioActual();
+    String perfil = buscarPerfil.getText();
+    UsuarioInfo cuentaInfo = gestionCuentas.obtenerInformacion(perfil);
     
+    if (usuarioLogueado != null && cuentaInfo != null) {
+        seguidos.setText("Seguidos: " + usuarioLogueado.getSeguidos().cantidadSeguidos());
+        seguidores.setText("Seguidores: " + cuentaInfo.getSeguidores());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +53,8 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
         seguir = new javax.swing.JButton();
         dejar_de_seguir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        seguidores = new javax.swing.JLabel();
+        seguidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +115,10 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
             }
         });
 
+        seguidores.setText("seguidores:");
+
+        seguidos.setText("seguidos:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,13 +155,18 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buscarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(424, 424, 424)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(316, 316, 316)
                         .addComponent(seguir, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
+                        .addGap(56, 56, 56)
                         .addComponent(dejar_de_seguir, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(420, 420, 420)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(224, 224, 224)
+                        .addComponent(seguidores, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addComponent(seguidos, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -171,13 +190,17 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(user)
                     .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(seguidos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seguidores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(85, 85, 85)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seguir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dejar_de_seguir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                .addGap(80, 80, 80)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,38 +230,88 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         String perfil = buscarPerfil.getText();
-                if (gestionCuentas.verificar(perfil)) {
-                    UsuarioInfo info = gestionCuentas.obtenerInformacion(perfil);
-                    if (info != null) {
-                        user.setText(info.getusuario());
-                        nombre.setText(info.getnombre());
-                        edad.setText(info.getedad());
-                        fecha.setText(info.getfecha());
-                        genero.setText(info.getgenero());
-                    } else {
-                        user.setText("No encontrado");
-                        nombre.setText("No encontrado");
-                        edad.setText("No encontrado");
-                        fecha.setText("No encontrado");
-                        genero.setText("No encontrado");
-                    }
-                } else {
-                    user.setText("Usuario no existe");
-                    nombre.setText("");
-                    edad.setText("");
-                    fecha.setText("");
-                    genero.setText("");
-                }
+        UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
+        if (perfil.equals(usuarioActual.getusuario())) {
+            JOptionPane.showMessageDialog(null, "No puedes ver tu propio perfil aquí.");
+            return;
+        }
+        if (gestionCuentas.verificar(perfil)) {
+            UsuarioInfo info = gestionCuentas.obtenerInformacion(perfil);
+            if (info != null) {
+                user.setText(info.getusuario());
+                nombre.setText(info.getnombre());
+                edad.setText(info.getedad());
+                fecha.setText(info.getfecha());
+                genero.setText(info.getgenero());
 
-            
+                seguidores.setText("Seguidores: " + info.getSeguidores());
+                seguidos.setText("Seguidos: " + info.getSeguidos().cantidadSeguidos());
+            } else {
+                user.setText("No encontrado");
+                nombre.setText("No encontrado");
+                edad.setText("No encontrado");
+                fecha.setText("No encontrado");
+                genero.setText("No encontrado");
+
+                seguidores.setText("Seguidores: ");
+                seguidos.setText("Seguidos: ");
+            }
+        } else {
+            user.setText("Usuario no existe");
+            nombre.setText("");
+            edad.setText("");
+            fecha.setText("");
+            genero.setText("");
+
+            // Limpiar la información de seguidores y seguidos
+            seguidores.setText("Seguidores: ");
+            seguidos.setText("Seguidos: ");
+        }
+
+
     }//GEN-LAST:event_buscarActionPerformed
 
     private void dejar_de_seguirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dejar_de_seguirMouseClicked
-        // TODO add your handling code here:
+    String perfil = buscarPerfil.getText();
+UsuarioInfo usuarioLogueado = user_actual.getUsuarioActual();
+UsuarioInfo cuentaADejarDeSeguir = gestionCuentas.obtenerInformacion(perfil);
+
+if (cuentaADejarDeSeguir != null && !perfil.equals(usuarioLogueado.getusuario())) {
+    int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas dejar de seguir a " + cuentaADejarDeSeguir.getusuario() + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
+        usuarioLogueado.dejarDeSeguir(cuentaADejarDeSeguir);
+        JOptionPane.showMessageDialog(null, "Has dejado de seguir a " + cuentaADejarDeSeguir.getusuario());
+        // Llamar al método que actualiza la interfaz gráfica
+        actualizarInterfaz(); // Llama a un método para actualizar la UI
+    }
+} else if (perfil.equals(usuarioLogueado.getusuario())) {
+    JOptionPane.showMessageDialog(null, "No puedes dejar de seguirte a ti mismo.");
+} else {
+    JOptionPane.showMessageDialog(null, "Usuario no encontrado.");
+}
     }//GEN-LAST:event_dejar_de_seguirMouseClicked
 
     private void seguirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seguirMouseClicked
-        // TODO add your handling code here:
+     String perfil = buscarPerfil.getText();
+UsuarioInfo usuarioLogueado = user_actual.getUsuarioActual();
+UsuarioInfo cuentaASeguir = gestionCuentas.obtenerInformacion(perfil);
+
+if (cuentaASeguir != null && !perfil.equals(usuarioLogueado.getusuario())) {
+    int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas seguir a " + cuentaASeguir.getusuario() + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
+        usuarioLogueado.seguirUsuario(cuentaASeguir);
+        JOptionPane.showMessageDialog(null, "Ahora sigues a " + cuentaASeguir.getusuario());
+        // Llamar al método que actualiza la interfaz gráfica
+        actualizarInterfaz(); // Llama a un método para actualizar la UI
+    }
+} else if (perfil.equals(usuarioLogueado.getusuario())) {
+    JOptionPane.showMessageDialog(null, "No puedes seguirte a ti mismo.");
+} else {
+    JOptionPane.showMessageDialog(null, "Usuario no encontrado.");
+}
+
     }//GEN-LAST:event_seguirMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -264,6 +337,8 @@ public class Entrar_un_perfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre;
+    private javax.swing.JLabel seguidores;
+    private javax.swing.JLabel seguidos;
     private javax.swing.JButton seguir;
     private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables

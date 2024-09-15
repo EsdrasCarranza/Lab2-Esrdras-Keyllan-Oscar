@@ -6,22 +6,22 @@ import javax.swing.JList;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author 50488
  */
-
 public class buscar_perfil extends javax.swing.JFrame {
-DefaultListModel<String> listmodel = new DefaultListModel<>();
+
+    DefaultListModel<String> listmodel = new DefaultListModel<>();
+
     /**
      * Creates new form buscar_perfil
      */
-   
+
     public buscar_perfil() {
         initComponents();
         lista.setModel(listmodel);
-        
+
     }
 
     /**
@@ -136,16 +136,15 @@ DefaultListModel<String> listmodel = new DefaultListModel<>();
     private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
 
         String palabraUser = usuariobusqueda.getText();
-         listmodel.clear();  // Limpiar los resultados anteriores
+listmodel.clear();  // Limpiar los resultados anteriores
 
-    // Llamar al método que realiza la búsqueda y devuelve los resultados
-    String[] resultados = UsuarioInfo.buscarUsuariosConSeguimiento(palabraUser, user_actual.getUsuarioActual());
+// Llamar al método que realiza la búsqueda y devuelve los resultados
+String[] resultados = UsuarioInfo.buscarUsuariosConSeguimiento(palabraUser, user_actual.getUsuarioActual());
 
-    // Añadir los resultados a la lista para que se muestren en pantalla
-    for (String resultado : resultados) {
-        listmodel.addElement(resultado);  // Añadir los resultados al DefaultListModel
-    }
-        
+// Añadir los resultados a la lista para que se muestren en pantalla
+for (String resultado : resultados) {
+    listmodel.addElement(resultado);  // Añadir los resultados al DefaultListModel
+}
     }//GEN-LAST:event_buscarMouseClicked
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed

@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -68,6 +71,11 @@ public class menu_principal extends javax.swing.JFrame {
         });
 
         jButton4.setText("desctivar cuenta");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,6 +155,28 @@ public class menu_principal extends javax.swing.JFrame {
         xd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_entrar_perfilMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+           UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
+
+    if (usuarioActual == null) {
+        JOptionPane.showMessageDialog(null, "No hay un usuario logueado.");
+        return;
+    }
+
+    if (usuarioActual.isCuentaActiva()) {
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas desactivar tu cuenta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            usuarioActual.desactivarCuenta();
+            JOptionPane.showMessageDialog(null, "Tu cuenta ha sido desactivada.");
+            // Actualiza la interfaz para reflejar los cambios
+        }
+    } else {
+        usuarioActual.activarCuenta();
+        JOptionPane.showMessageDialog(null, "Tu cuenta ha sido activada.");
+        // Actualiza la interfaz para reflejar los cambios
+    }
+    }//GEN-LAST:event_jButton4MouseClicked
 
     
     /**
