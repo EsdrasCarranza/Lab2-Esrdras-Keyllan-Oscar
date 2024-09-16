@@ -100,9 +100,10 @@ public class interacciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-         UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
-
-        if (usuarioActual != null) {
+   UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
+    
+    if (usuarioActual != null) {
+        if (usuarioActual.isCuentaActiva()) {
             // Obtener el arreglo de menciones del usuario actual
             Twit[] menciones = usuarioActual.obtenerMenciones();
 
@@ -121,8 +122,12 @@ public class interacciones extends javax.swing.JFrame {
                 }
             }
         } else {
-            areaMenciones.setText("No hay un usuario logueado.\n");
+            // La cuenta está desactivada, no mostrar menciones
+            areaMenciones.setText("Tu cuenta está desactivada. No se muestran menciones.\n");
         }
+    } else {
+        areaMenciones.setText("No hay un usuario logueado.\n");
+    }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

@@ -107,24 +107,24 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void xdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xdMouseClicked
- String hashtag = hashtagField.getText().trim();
-        if (hashtag.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El hashtag no puede estar vacío.");
-            return;
-        }
+String hashtag = hashtagField.getText().trim();
+if (hashtag.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "El hashtag no puede estar vacío.");
+    return;
+}
 
-        // Obtener los tweets que contienen el hashtag
-        String[] tweetsConHashtag = obtenerTweetsConHashtag(hashtag);
+// Obtener los tweets que contienen el hashtag
+String[] tweetsConHashtag = obtenerTweetsConHashtag(hashtag);
 
-        // Mostrar los tweets en el área de texto
-        if (tweetsConHashtag.length == 0) {
-            resultsArea.setText("No se encontraron tweets con el hashtag #" + hashtag);
-        } else {
-            resultsArea.setText("Tweets con el hashtag #" + hashtag + ":\n\n");
-            for (String tweet : tweetsConHashtag) {
-                resultsArea.append(tweet + "\n\n");
-            }
-        }       
+// Mostrar los tweets en el área de texto
+if (tweetsConHashtag.length == 0) {
+    resultsArea.setText("No se encontraron tweets con el hashtag #" + hashtag);
+} else {
+    resultsArea.setText("Tweets con el hashtag #" + hashtag + ":\n\n");
+    for (String tweet : tweetsConHashtag) {
+        resultsArea.append(tweet + "\n\n");
+    }
+}    
     }//GEN-LAST:event_xdMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -133,31 +133,34 @@ public class NewJFrame extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButton2MouseClicked
-private String[] obtenerTweetsConHashtag(String hashtag) {
-        final int MAX_TWEETS = 100; // Ajusta el tamaño según sea necesario
-        String[] tweetsConHashtag = new String[MAX_TWEETS];
-        int index = 0;
+public String[] obtenerTweetsConHashtag(String hashtag) {
+    // Estimar un tamaño máximo para los resultados
+    final int MAX_TWEETS = 1000;
+    String[] resultados = new String[MAX_TWEETS];
+    int contadorResultados = 0;
 
-        // Recorre todos los usuarios para buscar tweets con el hashtag
-        int contador = UsuarioInfo.getContador();
-        for (int i = 0; i < contador; i++) {
-            UsuarioInfo usuario = UsuarioInfo.getCuenta(i);
-            String[] timeline = usuario.obtenerTimeline();
-            for (String tweet : timeline) {
-                if (tweet.contains("#" + hashtag)) {
-                    if (index < MAX_TWEETS) {
-                        tweetsConHashtag[index++] = tweet;
+    // Iterar sobre todos los usuarios
+    for (int i = 0; i < UsuarioInfo.getContador(); i++) {
+        UsuarioInfo usuario = UsuarioInfo.getCuenta(i);
+        if (usuario.isCuentaActiva()) { // Solo procesar usuarios con cuenta activa
+            Twit[] twits = usuario.obtenerTwits();
+            for (Twit twit : twits) {
+                if (twit.getContenido().contains("#" + hashtag)) {
+                    if (contadorResultados < MAX_TWEETS) {
+                        resultados[contadorResultados] = twit.toString();
+                        contadorResultados++;
                     }
                 }
             }
         }
-
-        // Redimensionar el arreglo a la cantidad de tweets encontrados
-        String[] resultadoFinal = new String[index];
-        System.arraycopy(tweetsConHashtag, 0, resultadoFinal, 0, index);
-
-        return resultadoFinal;
     }
+
+    // Convertir el arreglo a un tamaño exacto
+    String[] tweetsFiltrados = new String[contadorResultados];
+    System.arraycopy(resultados, 0, tweetsFiltrados, 0, contadorResultados);
+
+    return tweetsFiltrados;
+}
     /**
      * @param args the command line arguments
      */

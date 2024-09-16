@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author 50488
@@ -17,7 +16,7 @@ public class menu_principal extends javax.swing.JFrame {
      */
     public menu_principal() {
         initComponents();
-        
+
     }
 
     /**
@@ -172,9 +171,9 @@ public class menu_principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       Visual_Inicio ne = new Visual_Inicio();
-       ne.setVisible(true);
-       this.dispose();
+        Visual_Inicio ne = new Visual_Inicio();
+        ne.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void buscarperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarperfilMouseClicked
@@ -184,33 +183,55 @@ public class menu_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarperfilMouseClicked
 
     private void entrar_perfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrar_perfilMouseClicked
-        Entrar_un_perfil xd =  new Entrar_un_perfil();
+        Entrar_un_perfil xd = new Entrar_un_perfil();
         xd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_entrar_perfilMouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-           UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
+ 
+        UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
 
-    if (usuarioActual == null) {
-        JOptionPane.showMessageDialog(null, "No hay un usuario logueado.");
-        return;
+if (usuarioActual == null) {
+    JOptionPane.showMessageDialog(null, "No hay un usuario logueado.");
+    return;
+}
+
+if (usuarioActual.isCuentaActiva()) {
+    int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas desactivar tu cuenta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+    if (opcion == JOptionPane.YES_OPTION) {
+        usuarioActual.desactivarCuenta();
+        // Actualizar directamente la interfaz
+        actualizarEstadoCuenta();
+        JOptionPane.showMessageDialog(null, "Tu cuenta ha sido desactivada.");
     }
+} else {
+    int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas activar tu cuenta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+    if (opcion == JOptionPane.YES_OPTION) {
+        usuarioActual.activarCuenta();
+        // Actualizar directamente la interfaz
+        actualizarEstadoCuenta();
+        JOptionPane.showMessageDialog(null, "Tu cuenta ha sido activada.");
+    }
+}
 
-    if (usuarioActual.isCuentaActiva()) {
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas desactivar tu cuenta?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (opcion == JOptionPane.YES_OPTION) {
-            usuarioActual.desactivarCuenta();
-            JOptionPane.showMessageDialog(null, "Tu cuenta ha sido desactivada.");
-            // Actualiza la interfaz para reflejar los cambios
+
+    }//GEN-LAST:event_jButton4MouseClicked
+private void actualizarEstadoCuenta() {
+    UsuarioInfo usuarioActual = user_actual.getUsuarioActual();
+
+    if (usuarioActual != null) {
+        // Mostrar un mensaje emergente con el estado de la cuenta
+        if (usuarioActual.isCuentaActiva()) {
+            JOptionPane.showMessageDialog(null, "Tu cuenta está activa.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Tu cuenta está desactivada.");
         }
     } else {
-        usuarioActual.activarCuenta();
-        JOptionPane.showMessageDialog(null, "Tu cuenta ha sido activada.");
-        // Actualiza la interfaz para reflejar los cambios
+        // Si no hay un usuario logueado, mostrar un mensaje de error
+        JOptionPane.showMessageDialog(null, "No hay un usuario logueado.");
     }
-    }//GEN-LAST:event_jButton4MouseClicked
-
+}
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         timeline xd = new timeline();
         xd.setVisible(true);
@@ -224,16 +245,14 @@ public class menu_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        NewJFrame xd = new  NewJFrame();
+        NewJFrame xd = new NewJFrame();
         xd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5MouseClicked
 
-    
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarperfil;
