@@ -8,21 +8,33 @@
  * @author 50488
  */
 public class seguidores {
-   
- private UsuarioInfo[] seguidos = new UsuarioInfo[100];
-    private int contadorSeguidos = 0;
-
     
+    private UsuarioInfo[] seguidos = new UsuarioInfo[100]; // Lista de usuarios seguidos
+    private int cantidadSeguidos = 0;
 
-    public void seguirUsuario(UsuarioInfo usuario) {
-        if (contadorSeguidos < seguidos.length) {
-            seguidos[contadorSeguidos] = usuario;
-            contadorSeguidos++;
+    public void agregar(UsuarioInfo usuario) {
+        if (cantidadSeguidos < seguidos.length) {
+            seguidos[cantidadSeguidos] = usuario;
+            cantidadSeguidos++;
+        }
+    }
+
+    public void eliminar(UsuarioInfo usuario) {
+        for (int i = 0; i < cantidadSeguidos; i++) {
+            if (seguidos[i].equals(usuario)) {
+                // Desplazar elementos
+                for (int j = i; j < cantidadSeguidos - 1; j++) {
+                    seguidos[j] = seguidos[j + 1];
+                }
+                seguidos[cantidadSeguidos - 1] = null;
+                cantidadSeguidos--;
+                break;
+            }
         }
     }
 
     public boolean loSigo(UsuarioInfo usuario) {
-        for (int i = 0; i < contadorSeguidos; i++) {
+        for (int i = 0; i < cantidadSeguidos; i++) {
             if (seguidos[i].equals(usuario)) {
                 return true;
             }
@@ -30,49 +42,15 @@ public class seguidores {
         return false;
     }
 
+    public int cantidadSeguidos() {
+        return cantidadSeguidos;
+    }
+    
+    // Nuevo método para obtener el arreglo de usuarios seguidos
     public UsuarioInfo[] obtenerSeguidos() {
-        return seguidos;
+        UsuarioInfo[] seguidosActivos = new UsuarioInfo[cantidadSeguidos];
+        System.arraycopy(seguidos, 0, seguidosActivos, 0, cantidadSeguidos);
+        return seguidosActivos;
     }
 }
 
-
-
-
-//private UsuarioInfo usuario;
-//    private UsuarioInfo[] seguidos = new UsuarioInfo[100]; // Perfiles que sigo
-//    private UsuarioInfo[] seguidores = new UsuarioInfo[100]; // Perfiles que me siguen
-//    private int contadorSeguidos = 0;
-//    private int contadorSeguidores = 0;
-//
-//    public seguidores(UsuarioInfo usuario) {
-//        this.usuario = usuario;
-//    }
-//
-//    // Métodos para gestionar los perfiles que sigo
-//    public void seguir(UsuarioInfo perfil) {
-//        if (contadorSeguidos < seguidos.length) {
-//            seguidos[contadorSeguidos] = perfil;
-//            contadorSeguidos++;
-//        }
-//    }
-//
-//    public UsuarioInfo[] getSeguidos() {
-//        return seguidos;
-//    }
-//
-//    // Métodos para gestionar los perfiles que me siguen
-//    public void agregarSeguidor(UsuarioInfo perfil) {
-//        if (contadorSeguidores < seguidores.length) {
-//            seguidores[contadorSeguidores] = perfil;
-//            contadorSeguidores++;
-//        }
-//    }
-//
-//    public UsuarioInfo[] getSeguidores() {
-//        return seguidores;
-//    }
-//
-//    // Método para obtener la información del usuario
-//    public UsuarioInfo getUsuario() {
-//        return usuario;
-//    }

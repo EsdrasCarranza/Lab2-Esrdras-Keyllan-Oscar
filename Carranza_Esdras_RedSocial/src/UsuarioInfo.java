@@ -27,7 +27,7 @@ public class UsuarioInfo {
     private static UsuarioInfo[] cuentas = new UsuarioInfo[100];
     private static int contador = 0;
 
-    private Seguidores seguidos; // Clase que maneja los usuarios seguidos
+    private seguidores seguidos; // Clase que maneja los usuarios seguidos
 
     public UsuarioInfo(String usuario, String nombre, String edad, String fecha, String contraseña, String genero) {
         this.usuario = usuario;
@@ -35,7 +35,7 @@ public class UsuarioInfo {
         this.contraseña = contraseña;
         this.genero = genero;
         this.nombre = nombre;
-        this.seguidos = new Seguidores(); // Inicialización de la lista de seguidos
+        this.seguidos = new seguidores(); // Inicialización de la lista de seguidos
         this.cuenta_activada = true; 
         this.twits = new Twit[100];
     }
@@ -79,7 +79,7 @@ public class UsuarioInfo {
         return fecha;
     }
 
-    public Seguidores getSeguidos() {
+    public seguidores getSeguidos() {
         return seguidos;
     }
    
