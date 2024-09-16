@@ -19,7 +19,7 @@ public class Twit {
     public Twit(String usuario, String contenido) {
         this.usuario = usuario;
         this.contenido = contenido;
-        this.fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+        this.fecha = new SimpleDateFormat("dd/MM/yyyy ").format(new Date());
     }
 
     public String getUsuario() {

@@ -1,5 +1,7 @@
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -243,55 +245,29 @@ public class UsuarioInfo {
     public int getContadorTwits() {
         return contadorTwits;
     }
-    public String[] obtenerTimeline() {
-        int totalTwits = contadorTwits;
+   public String[] obtenerTimeline() {
+    Set<Twit> todosTwitsSet = new LinkedHashSet<>(); // Usar LinkedHashSet para evitar duplicados y mantener el orden
+    todosTwitsSet.addAll(Arrays.asList(obtenerTwits())); // Añadir los tweets propios
 
-        // Calcular el total de tweets de seguidores
-        UsuarioInfo[] seguidoresArray = seguidos.obtenerSeguidos();
-        for (int i = 0; i < seguidoresArray.length; i++) {
-            if (seguidoresArray[i] != null) {
-                totalTwits += seguidoresArray[i].getContadorTwits();
-            }
+    UsuarioInfo[] seguidoresArray = seguidos.obtenerSeguidos();
+    for (int i = 0; i < seguidoresArray.length; i++) {
+        if (seguidoresArray[i] != null && !seguidoresArray[i].getusuario().equals(this.getusuario())) {
+            todosTwitsSet.addAll(Arrays.asList(seguidoresArray[i].obtenerTwits()));
         }
-
-        Twit[] todosTwits = new Twit[totalTwits];
-        int index = 0;
-
-        // Añadir los tweets propios
-        Twit[] propiosTwits = obtenerTwits();
-        for (Twit twit : propiosTwits) {
-            todosTwits[index++] = twit;
-        }
-
-        // Añadir los tweets de los seguidores
-        for (int i = 0; i < seguidoresArray.length; i++) {
-            if (seguidoresArray[i] != null) {
-                Twit[] seguidosTwits = seguidoresArray[i].obtenerTwits();
-                for (Twit twit : seguidosTwits) {
-                    todosTwits[index++] = twit;
-                }
-            }
-        }
-
-        // Ordenar los tweets por fecha (más reciente primero)
-        for (int i = 0; i < todosTwits.length - 1; i++) {
-            for (int j = i + 1; j < todosTwits.length; j++) {
-                if (todosTwits[i].getFecha().compareTo(todosTwits[j].getFecha()) < 0) {
-                    Twit temp = todosTwits[i];
-                    todosTwits[i] = todosTwits[j];
-                    todosTwits[j] = temp;
-                }
-            }
-        }
-
-        // Convertir a arreglo de String para mostrar
-        String[] timeline = new String[totalTwits];
-        for (int i = 0; i < todosTwits.length; i++) {
-            timeline[i] = todosTwits[i].toString();
-        }
-
-        return timeline;
     }
+
+    // Convertir el set a un array y ordenar del más reciente al más viejo
+    Twit[] todosTwits = todosTwitsSet.toArray(new Twit[0]);
+    Arrays.sort(todosTwits, (t1, t2) -> t2.getFecha().compareTo(t1.getFecha())); // Ordenar en orden descendente
+
+    // Convertir a arreglo de String para mostrar
+    String[] timeline = new String[todosTwits.length];
+    for (int i = 0; i < todosTwits.length; i++) {
+        timeline[i] = todosTwits[i].toString();
+    }
+
+    return timeline;
+}
     public String[] obtenerInteracciones() {
         int totalTwits = UsuarioInfo.getContador() * 100; // Estimación alta
 
